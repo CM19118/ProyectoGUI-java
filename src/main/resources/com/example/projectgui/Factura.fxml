@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="850.666666666667" prefWidth="1112.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.FacturaController">
+   <children>
+      <Text layoutX="383.0" layoutY="118.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Faturas Emitidas" wrappingWidth="488.8033447265625">
+         <font>
+            <Font size="55.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tablaFacturas" layoutX="62.0" layoutY="172.0" prefHeight="326.0" prefWidth="1021.0">
+        <columns>
+          <TableColumn fx:id="columnIdFactura" prefWidth="61.666664123535156" text="ID Factura" />
+          <TableColumn fx:id="columnFechaFactura" prefWidth="112.33332824707031" text="Fecha de Emision" />
+            <TableColumn fx:id="columnMontoTotal" prefWidth="87.0" text="Monto Total" />
+            <TableColumn fx:id="columnCantidadProductos" prefWidth="148.66668701171875" text="Total Produc. Comprados" />
+            <TableColumn fx:id="columnProductos" prefWidth="345.0" text="Productos" />
+            <TableColumn fx:id="columnNombreCliente" prefWidth="176.0" text="Nombre Cliente" />
+            <TableColumn fx:id="columnTelefonoCliente" prefWidth="82.6666259765625" text="Telefono" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

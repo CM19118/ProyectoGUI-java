@@ -1,0 +1,29 @@
+.white-background{
+    -fx-background-color: #fff;
+}
+
+.transparent{
+    -fx-background-color: rgba(0,0,0,0);
+}
+
+.round-layout{
+    -fx-border-radius: 50;
+    -fx-border-color: #D7D7D7;
+}
+
+.selected{
+    -fx-background-color:#053B50;
+}
+
+.mouse-moved: hover{
+    -fx-background-color: #053B51;
+}
+
+
+.border-menu{
+    -fx-background-color: #176B87;
+}
+
+.border-top{
+    -fx-background-color: #053B50;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="850.666666666667" prefWidth="1112.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.VentasController">
+   <children>
+      <Text layoutX="417.0" layoutY="115.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Articulos vendidos">
+         <font>
+            <Font size="55.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tablaVentas" layoutX="23.0" layoutY="165.0" prefHeight="316.0" prefWidth="1061.0">
+        <columns>
+          <TableColumn fx:id="columnIdVenta" prefWidth="60.33332824707031" text="ID Venta" />
+            <TableColumn fx:id="columnFechaVenta" prefWidth="141.6666717529297" text="Fecha de la venta" />
+          <TableColumn fx:id="columnProductos" prefWidth="582.0" text="Productos Comprados" />
+            <TableColumn fx:id="columnCantidadProducto" prefWidth="171.0" text="Productos Comprados" />
+            <TableColumn fx:id="columnTotalProdcuto" prefWidth="94.0" text="Total Gastado" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>
