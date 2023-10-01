@@ -1,13 +1,18 @@
-package com.example.projectgui.Controller;
+package com.example.projectgui;
 
-import com.example.projectgui.DatabaseConnection;
+import javafx.animation.*;
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import com.example.projectgui.SessionManager;
+
 
 import java.io.IOException;
 import java.sql.Connection;
@@ -19,6 +24,10 @@ public class InicioSesion extends Application {
 
     @FXML
     private TextField txtPass, txtUser;
+    @FXML
+    private StackPane panelCentral;
+    @FXML
+    private AnchorPane panelLogin, panelRegister;
     private Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
@@ -27,10 +36,11 @@ public class InicioSesion extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectgui/InicioSesion.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 1110, 640); //Creamos una nueva escena, con 1110 de ancho y 640 alto
-        InicioSesion controller = fxmlLoader.getController(); // Obténgo el controlador
-        controller.setPrimaryStage(stage); // Establecemos el Stage en el controlador
-        stage.setTitle("INICIO DE SESION"); //Seteamos el tituloo de  la ventana GUI
+        Scene scene = new Scene(fxmlLoader.load(), 1110, 640);
+        InicioSesion controller = fxmlLoader.getController();
+        controller.setPrimaryStage(stage);
+
+        stage.setTitle("INICIO DE SESION");
         stage.setScene(scene);
         stage.show();
     }
@@ -42,7 +52,7 @@ public class InicioSesion extends Application {
 
         if(!password.isEmpty() && !username.isEmpty()){
             try (Connection connection = DatabaseConnection.getConnection()) {
-                String query = "SELECT * FROM tbl_usuarios WHERE correo = ? AND password = ?";
+                String query = "SELECT * FROM tbl_usuarios WHERE usuario = ? AND password = ?";
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
                 preparedStatement.setString(1, username);
                 preparedStatement.setString(2, password);
@@ -51,7 +61,19 @@ public class InicioSesion extends Application {
 
                 if (resultSet.next()) {
                     // Autenticación exitosa
-                    // Abrimos la nueva ventana, la ventana principal del sistema!
+                    // Almacenamos los datos del usuario que ha iniciado sesion (Manejo de sesiones)
+                    String usernamee = resultSet.getString("usuario"); // Obtengo el nombre de usuario de la base de datos
+                    String rol = resultSet.getString("rol"); // Obtengo el rol de la base de datos
+                    int idUsuario = resultSet.getInt("idUsuario"); // Obtengo el ID de usuario de la base de datos
+                    int idEmpleado = resultSet.getInt("idEmpleado"); // Obtengo el ID de empleado de la base de datos
+
+                    // Almacenamos los datos del usuario que ha iniciado sesión (Manejo de sesiones)
+                    UserSession userSession = new UserSession(usernamee, rol, idUsuario, idEmpleado);
+                    SessionManager.setUsuarioSesion(userSession); //Le pasamos el objeto userSession con los datos obtenidos del usuario
+                    //Al manejador de sesiones para poder usarlas desde cualquier clase.
+
+
+                    // Abrimos la nueva ventana, la ventana principal del sistema(el main)!
                     FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectgui/Main.fxml"));
                     Scene scene = new Scene(fxmlLoader.load(), 1420, 960);
                     primaryStage.setTitle("MENU PRINCIPAL");

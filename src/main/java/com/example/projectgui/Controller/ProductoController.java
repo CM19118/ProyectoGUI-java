@@ -56,7 +56,6 @@ public class ProductoController implements Initializable {
     @FXML
     public void aggProducto() {
         bandera = false;
-
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formProducto.fxml"));
             Parent parent = loader.load();

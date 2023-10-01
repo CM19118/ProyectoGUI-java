@@ -341,7 +341,7 @@ public class CarritoController {
 
         try {
             // Cargar el archivo FXML que contiene el formulario
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formCliente.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formAsistencia.fxml"));
             Parent root = loader.load();
 
             // Configurar el escenario con el contenido del formulario
