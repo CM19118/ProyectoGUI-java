@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="291.0" prefWidth="523.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.AsistenciaController">
    <children>
-      <Button layoutX="94.0" layoutY="121.0" mnemonicParsing="false" text="HORA DE ENTRADA" />
-      <Button layoutX="329.0" layoutY="121.0" mnemonicParsing="false" text="HORA DE SALIDA" />
+      <Button fx:id="btnMarcarAsistenciaEntrada" layoutX="94.0" layoutY="121.0" mnemonicParsing="false" text="HORA DE ENTRADA" />
+      <Button fx:id="btnMarcarAsistenciaSalida" layoutX="329.0" layoutY="121.0" mnemonicParsing="false" text="HORA DE SALIDA" />
    </children>
 </AnchorPane>
