@@ -14,11 +14,11 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane prefHeight="850.666666666667" prefWidth="1112.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.TblProveedorController">
+<GridPane prefHeight="952.0" prefWidth="1461.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.TblProveedorController">
 
     <columnConstraints>
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1112.0" minWidth="10.0" prefWidth="1112.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="549.77783203125" minWidth="0.0" prefWidth="0.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1422.22216796875" minWidth="10.0" prefWidth="1414.22216796875" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="549.77783203125" minWidth="0.0" prefWidth="46.77783203125" />
     </columnConstraints>
     <rowConstraints>
         <RowConstraints maxHeight="595.0" minHeight="0.0" prefHeight="163.3333282470703" vgrow="SOMETIMES" />
@@ -26,7 +26,7 @@
         <RowConstraints maxHeight="258.111083984375" minHeight="10.0" prefHeight="115.99997965494788" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <TableView fx:id="tablaProveedor" prefHeight="562.0" prefWidth="1119.0" GridPane.rowIndex="1">
+        <TableView fx:id="tablaProveedor" prefHeight="605.0" prefWidth="1225.0" GridPane.rowIndex="1">
             <columns>
                 <TableColumn fx:id="col_idProv" editable="false" prefWidth="49.999969482421875" style="-fx-alignment: center;" text="Id" />
                 <TableColumn fx:id="col_nombre" editable="false" prefWidth="186.66665649414062" style="-fx-alignment: center;" text="Nombre Proveedor" />

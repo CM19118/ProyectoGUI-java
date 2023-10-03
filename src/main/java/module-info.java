@@ -4,6 +4,7 @@ module com.example.projectgui {
     requires java.sql;
     requires com.dlsc.formsfx;
     requires itextpdf;
+    requires jbcrypt;
 
     opens com.example.projectgui.Models to javafx.base;
     opens com.example.projectgui to javafx.fxml;

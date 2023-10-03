@@ -10,14 +10,14 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="850.666666666667" prefWidth="1112.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.VentasController">
+<AnchorPane prefHeight="952.0" prefWidth="1461.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.VentasController">
    <children>
       <Text layoutX="401.0" layoutY="73.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Articulos vendidos">
          <font>
             <Font size="55.0" />
          </font>
       </Text>
-      <TableView fx:id="tablaVentas" layoutX="26.0" layoutY="96.0" prefHeight="316.0" prefWidth="1061.0">
+      <TableView fx:id="tablaVentas" layoutX="26.0" layoutY="96.0" prefHeight="415.0" prefWidth="1400.0">
         <columns>
           <TableColumn fx:id="columnIdVenta" prefWidth="60.33332824707031" text="ID Venta" />
             <TableColumn fx:id="columnFechaVenta" prefWidth="141.6666717529297" text="Fecha de la venta" />
@@ -26,25 +26,25 @@
             <TableColumn fx:id="columnTotalProdcuto" prefWidth="94.0" text="Total Gastado" />
         </columns>
       </TableView>
-      <Button fx:id="btnImprimirInforme" layoutX="809.0" layoutY="532.0" mnemonicParsing="false" text="Imprimir Informe" />
-      <Label layoutX="44.0" layoutY="437.0" prefHeight="21.0" prefWidth="115.0" text="Buscar por fecha">
+      <Button fx:id="btnImprimirInforme" layoutX="876.0" layoutY="674.0" mnemonicParsing="false" text="Imprimir Informe" />
+      <Label layoutX="111.0" layoutY="579.0" prefHeight="21.0" prefWidth="115.0" text="Buscar por fecha">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Line endX="575.0" layoutX="143.0" layoutY="500.0" startX="-100.0" />
-      <DatePicker fx:id="buscarPorFecha" layoutX="42.0" layoutY="466.0" />
-      <Button fx:id="btnFiltrarPorFecha" layoutX="246.0" layoutY="466.0" mnemonicParsing="false" text="Buscar" />
-      <Label layoutX="45.0" layoutY="544.0" prefHeight="21.0" prefWidth="185.0" text="Buscar por rango de fechas">
+      <Line endX="575.0" layoutX="210.0" layoutY="642.0" startX="-100.0" />
+      <DatePicker fx:id="buscarPorFecha" layoutX="109.0" layoutY="608.0" />
+      <Button fx:id="btnFiltrarPorFecha" layoutX="313.0" layoutY="608.0" mnemonicParsing="false" text="Buscar" />
+      <Label layoutX="112.0" layoutY="686.0" prefHeight="21.0" prefWidth="185.0" text="Buscar por rango de fechas">
          <font>
             <Font size="15.0" />
          </font>
       </Label>
-      <Line endX="575.0" layoutX="146.0" layoutY="630.0" startX="-100.0" />
-      <DatePicker fx:id="fecha1" layoutX="42.0" layoutY="592.0" />
-      <Button fx:id="btnFiltrarPorRango" layoutX="437.0" layoutY="592.0" mnemonicParsing="false" text="Buscar" />
-      <DatePicker fx:id="fecha2" layoutX="230.0" layoutY="592.0" />
-      <Label layoutX="45.0" layoutY="575.0" text="Fecha 1" />
-      <Label layoutX="230.0" layoutY="575.0" text="Fecha 2" />
+      <Line endX="575.0" layoutX="213.0" layoutY="772.0" startX="-100.0" />
+      <DatePicker fx:id="fecha1" layoutX="109.0" layoutY="734.0" />
+      <Button fx:id="btnFiltrarPorRango" layoutX="504.0" layoutY="734.0" mnemonicParsing="false" text="Buscar" />
+      <DatePicker fx:id="fecha2" layoutX="297.0" layoutY="734.0" />
+      <Label layoutX="112.0" layoutY="717.0" text="Fecha 1" />
+      <Label layoutX="297.0" layoutY="717.0" text="Fecha 2" />
    </children>
 </AnchorPane>

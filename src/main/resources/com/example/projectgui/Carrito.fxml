@@ -8,10 +8,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="850.666666666667" prefWidth="1188.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.CarritoController">
+<AnchorPane prefHeight="952.0" prefWidth="1461.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.CarritoController">
    <children>
 
-      <TableView fx:id="tablaProductosDisponibles" layoutX="45.0" layoutY="72.0" prefHeight="225.0" prefWidth="845.0">
+      <TableView fx:id="tablaProductosDisponibles" layoutX="45.0" layoutY="72.0" prefHeight="225.0" prefWidth="1368.0">
         <columns>
           <TableColumn fx:id="columIdProducto" prefWidth="79.0" text="Id Producto" />
           <TableColumn fx:id="columNombreProducto" prefWidth="357.0" text="Nombre Producto" />
@@ -20,7 +20,7 @@
             <TableColumn fx:id="columAcciones" prefWidth="155.0" text="Accion" />
         </columns>
       </TableView>
-      <TableView fx:id="tablaTemporalCarrito" layoutX="34.0" layoutY="328.0" prefHeight="161.0" prefWidth="847.0">
+      <TableView fx:id="tablaTemporalCarrito" layoutX="34.0" layoutY="328.0" prefHeight="161.0" prefWidth="1369.0">
          <columns>
             <TableColumn fx:id="col_nombreProducto" prefWidth="305.0" text="Nombre Producto" />
             <TableColumn fx:id="col_CantidadComprar" prefWidth="121.0" text="Cantidad A Comprar" />

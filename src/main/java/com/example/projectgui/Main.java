@@ -1,42 +1,36 @@
 package com.example.projectgui;
 
-import com.example.projectgui.Controller.*;
-import com.example.projectgui.DatabaseConnection;
-import com.example.projectgui.Models.Producto;
-import com.example.projectgui.Models.Proveedor;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.util.Callback;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
-import java.util.Optional;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.util.ResourceBundle;
 
 public class Main implements Initializable {
     @FXML
     private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores;
     @FXML
+    private MenuItem opcCrearEmpleado, opcCrearUsuarios;
+    @FXML
     private StackPane centerPane;
     @FXML
     private SplitMenuButton splitMenuBtn;
-    @FXML
-    //private MenuItem asistenciaOptions;
+
 
     //INSTANCIAS PARA LA BASE DE DATOS
     private Connection connect;
@@ -53,11 +47,11 @@ public class Main implements Initializable {
         // Verificamos si la sesión existe y obtenemos datos
         if (userSession != null) {
             String username = userSession.getUsername();
-            String rol = userSession.getRol();
+            int rol = Integer.parseInt(userSession.getRol());
+            manejodeSesion(rol);
             int idUsuario = userSession.getIdUsuario();
             int idEmpleado = userSession.getIdEmpleado();
-            splitMenuBtn.setText(Integer.parseInt(rol) != 1 ? "ADMIN" : "EMPLEADO");
-            System.out.println("EL NOMBRE DEL USUARIO ES: "+username);
+
         } else {
             // No hay sesión activa
         }
@@ -79,6 +73,18 @@ public class Main implements Initializable {
         }
     }
 
+    private void manejodeSesion(int rol){
+        if(rol == 0){
+            splitMenuBtn.setText("Admin");
+        }else if(rol == 1){
+            splitMenuBtn.setText("Empleado");
+            opcCrearEmpleado.setVisible(false);
+            opcCrearUsuarios.setVisible(false);
+            btnProveedores.setVisible(false);
+        }else{
+            splitMenuBtn.setText("Tecnico");
+        }
+    }
 
     private void loadView(String fxmlFile) {
         try {
@@ -88,10 +94,11 @@ public class Main implements Initializable {
             // Obtengo el controlador secundario desde el FXMLLoader para obtener los datos del diseno fmxl.
             Object controller = loader.getController();
 
-            // Esto reemplazaa el contenido del centro del StackPane
+            // Esto reemplazaa el contenido del centro del StackPane (panel principal del main donde se muestra la informacion)
             centerPane.getChildren().clear();
             centerPane.getChildren().add(view);
 
+            /*
             if (controller instanceof TblProductController) {
                 TblProductController productoController = (TblProductController) controller;
                 productoController.mostrarListaProducto();
@@ -110,7 +117,7 @@ public class Main implements Initializable {
             } else if(controller instanceof  ProveedorController){
                 ProveedorController proveedorController = (ProveedorController) controller;
             }
-
+             */
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -132,6 +139,15 @@ public class Main implements Initializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @FXML
+    private void openFormEmpleados(){
+        loadView("Empleado.fxml");
+    }
+    @FXML
+    private void openFormUsuarios(){
+        loadView("Usuario.fxml");
     }
 
 }

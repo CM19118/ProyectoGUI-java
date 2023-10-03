@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.*;
 import java.util.ArrayList;
@@ -43,6 +44,7 @@ public class ProductoController implements Initializable {
     public static int idProducto;
 
     private TblProductController tblproduct;
+    private static TblProductController mainControllerInstance;
     //
 
     @Override
@@ -152,9 +154,6 @@ public class ProductoController implements Initializable {
                 if (stage != null) {
                     stage.close();
                 }
-
-                // Actualiza la tabla de productos
-
             } else {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText(null);
@@ -173,8 +172,6 @@ public class ProductoController implements Initializable {
             }
         }
     }
-
-
 
     public void cargandoDatosComBox() throws SQLException {
         // Obteniendo la conexión a la base de datos aquí
@@ -197,7 +194,6 @@ public class ProductoController implements Initializable {
 
         ObservableList<String> items = FXCollections.observableArrayList(nombresProveedores);
         listProveedores.setItems(items);
-
     }
     private void clear() {
         fieldnameProduct.setText(null);

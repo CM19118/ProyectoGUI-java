@@ -7,7 +7,6 @@
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.image.Image?>
@@ -23,7 +22,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="950.0" prefWidth="1360.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Main">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="998.0" prefWidth="1751.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Main">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="200.0" spacing="20.0" stylesheets="@../../../css/styles.css" BorderPane.alignment="CENTER">
          <children>
@@ -33,23 +32,14 @@
                </font>
             </Label>
             <Separator maxHeight="-Infinity" orientation="VERTICAL" prefHeight="46.0" prefWidth="12.0" />
-            <HBox alignment="CENTER" maxHeight="-Infinity" prefHeight="35.0" prefWidth="290.0" spacing="8.0" styleClass="round-layout" stylesheets="@../../../css/styles.css">
-               <children>
-                  <TextField prefHeight="30.0" prefWidth="235.0" promptText="Buscar..." styleClass="transparent" stylesheets="@../../../css/styles.css" />
-                  <ImageView fitHeight="22.0" fitWidth="22.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-
-                     </image>
-                  </ImageView>
-               </children>
-            </HBox>
-            <Pane prefHeight="58.0" prefWidth="484.0" />
+            <Pane prefHeight="58.0" prefWidth="1105.0" />
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="333.0">
                <children>
                   <SplitMenuButton fx:id="splitMenuBtn" mnemonicParsing="false">
                     <items>
                       <MenuItem mnemonicParsing="false" onAction="#openFormAsistencia" text="MARCAR ASISTENCIA" />
-                      <MenuItem mnemonicParsing="false" text="NO DISPONIBLE Tigrin" />
+                      <MenuItem fx:id="opcCrearEmpleado" mnemonicParsing="false" onAction="#openFormEmpleados" text="CREAR EMPLEADOS" />
+                        <MenuItem fx:id="opcCrearUsuarios" mnemonicParsing="false" onAction="#openFormUsuarios" text="CREAR USUARIOS" />
                     </items>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">

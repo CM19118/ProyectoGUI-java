@@ -151,6 +151,7 @@ public class TblProductController implements Initializable {
 
 
     public void mostrarListaProducto(){
+        dataList.clear();
         ObservableList<Producto> mostrarProducto = listaProducto();
 
         col_idProd.setCellValueFactory(new PropertyValueFactory<>("idProducto"));
@@ -208,7 +209,7 @@ public class TblProductController implements Initializable {
 
                                     if (filasAfectadas > 0) {
                                         // Eliminación exitosa, puedes actualizar la tabla
-                                        tablaProducto.getItems().remove(producto);
+                                        dataList.remove(producto);
                                     }
                                 } catch (SQLException e) {
                                     e.printStackTrace();
