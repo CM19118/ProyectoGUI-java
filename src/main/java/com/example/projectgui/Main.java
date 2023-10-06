@@ -48,7 +48,7 @@ public class Main implements Initializable {
         if (userSession != null) {
             String username = userSession.getUsername();
             int rol = Integer.parseInt(userSession.getRol());
-            manejodeSesion(rol);
+            manejodeVistas(rol);
             int idUsuario = userSession.getIdUsuario();
             int idEmpleado = userSession.getIdEmpleado();
 
@@ -73,7 +73,7 @@ public class Main implements Initializable {
         }
     }
 
-    private void manejodeSesion(int rol){
+    private void manejodeVistas(int rol){
         if(rol == 0){
             splitMenuBtn.setText("Admin");
         }else if(rol == 1){
@@ -83,6 +83,9 @@ public class Main implements Initializable {
             btnProveedores.setVisible(false);
         }else{
             splitMenuBtn.setText("Tecnico");
+            opcCrearEmpleado.setVisible(false);
+            opcCrearUsuarios.setVisible(false);
+            btnProveedores.setVisible(false);
         }
     }
 

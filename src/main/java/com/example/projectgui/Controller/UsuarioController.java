@@ -94,13 +94,15 @@ public class UsuarioController implements Initializable {
                 rol = "Tecnico";
             }
             usuarioController.fieldUsuario.setText(usuario.getUsuario());
-            usuarioController.fieldPassword.setText(usuario.getPassword());
+            //usuarioController.fieldPassword.setText(usuario.getPassword());
             usuarioController.cargandoDatosListEmpleados();
             usuarioController.cargandoDatosListRoles();
+
 
             usuarioController.listRoles.setValue(rol);
             //System.out.println("EL NOMBRE COMPLETO DEL EMPLEADO USUARIO ES: "+empleado.getNombreCompleto());
             usuarioController.listEmpleados.setValue(empleado.getNombreCompleto());
+            usuarioController.listEmpleados.setDisable(true);
 
             Scene scene = new Scene(parent);
             stage = new Stage();
@@ -245,7 +247,7 @@ public class UsuarioController implements Initializable {
         // Obteniendo la conexión a la base de datos aquí
         connect = DatabaseConnection.getConnection();
         statement = connect.createStatement();
-        result = statement.executeQuery("SELECT * FROM tbl_empleados");
+        result = statement.executeQuery("SELECT * FROM tbl_empleados WHERE estadoUsuario = 0");
 
         // Creamos una lista para almacenar los datos del proveedor y guardarlo en el combox
         List<String> nombresEmpleados = new ArrayList<>();
