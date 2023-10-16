@@ -10,6 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -23,15 +24,15 @@ import java.util.ResourceBundle;
 
 public class Main implements Initializable {
     @FXML
-    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores;
+    private Text textoMain;
+    @FXML
+    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones;
     @FXML
     private MenuItem opcCrearEmpleado, opcCrearUsuarios;
     @FXML
     private StackPane centerPane;
     @FXML
     private SplitMenuButton splitMenuBtn;
-
-
     //INSTANCIAS PARA LA BASE DE DATOS
     private Connection connect;
     private Statement statement;
@@ -60,16 +61,25 @@ public class Main implements Initializable {
     private void handleClick(ActionEvent event) {
         if (event.getSource() == btnProductos) {
             loadView("Producto.fxml");
+            textoMain.setText("Producto");
         } else if (event.getSource() == btnInventario) {
             loadView("Inventario.fxml");
+            textoMain.setText("Inventario");
         } else if (event.getSource() == btnCarrito) {
             loadView("Carrito.fxml");
+            textoMain.setText("Carrito");
         } else if (event.getSource() == btnFacturas) {
             loadView("Factura.fxml");
+            textoMain.setText("Factura");
         } else if(event.getSource() == btnVentas){
             loadView("Ventas.fxml");
+            textoMain.setText("Ventas");
         } else if(event.getSource() == btnProveedores){
             loadView("Proveedor.fxml");
+            textoMain.setText("Proveedor");
+        }else if(event.getSource() == btnReparaciones){
+            loadView("Reparaciones.fxml");
+            textoMain.setText("Reparaciones");
         }
     }
 

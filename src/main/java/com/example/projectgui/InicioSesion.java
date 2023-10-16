@@ -30,7 +30,7 @@ public class InicioSesion extends Application {
 
     @FXML
     private TextField txtPass, txtUser, txtPassword1, txtPassword2;
-    private String email;
+    private static String email;
     private Stage primaryStage;
     private static final String CARACTERES_PERMITIDOS = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     private static final SecureRandom random = new SecureRandom();
@@ -54,7 +54,6 @@ public class InicioSesion extends Application {
         stage.setScene(scene);
         stage.show();
     }
-
     private void showLogin() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectgui/InicioSesion.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1110, 640);
@@ -113,7 +112,6 @@ public class InicioSesion extends Application {
             mostrarError("HAY CAMPOS VACÍOS");
         }
     }
-
     // Función para mostrar un mensaje de error en un cuadro de diálogo
     private void mostrarError(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -121,7 +119,6 @@ public class InicioSesion extends Application {
         alert.setContentText(mensaje);
         alert.showAndWait();
     }
-
     // Función para obtener el rol del usuario desde la base de datos
     private String obtenerRolDeLaBaseDeDatos(Connection connection, int idUsuario) throws SQLException {
         String rol = "RolPorDefecto"; // Establece un valor por defecto si no puedes obtener el rol desde la base de datos
@@ -159,12 +156,12 @@ public class InicioSesion extends Application {
         alert.showAndWait().ifPresent(response -> {
             if (response == sendCodeButton) {
                 if(!emailTextField.getText().isEmpty()){
-                    email = emailTextField.getText();
                     // Aqu implementamos la lógica para enviar el código de recuperación al correo electrónico proporcionado
                     codigo_verificacion = generarCodigoVerificacion(6);
                     //Invocamos funcion para insertar el codigo en el email del usuario
-                    actualizarCodigoVerificacion(email,codigo_verificacion);
-                    enviarCodigoVerificacion(email,codigo_verificacion);
+                    //actualizarCodigoVerificacion(email,codigo_verificacion);
+                    //enviarCodigoVerificacion(email,codigo_verificacion);
+                    email = emailTextField.getText();
                     System.out.println("Enviando código de recuperación a: " + email);
                     ShowVerificationCodeDialog(emailTextField.getText());
                 }else{
@@ -176,7 +173,6 @@ public class InicioSesion extends Application {
                 alert.close();
             }
         });
-
     }
     public void ShowVerificationCodeDialog(String email){
         // Creamos un campo de texto para que ingreseeel correo electrónico
@@ -225,9 +221,8 @@ public class InicioSesion extends Application {
             }
         });
     }
-
     public boolean comprobarCodigoVerificacion(String email, String codigo) {
-        String query = "SELECT * FROM tbl_empleados WHERE correo = ? AND codigo_verificacion = ? AND TIMESTAMPDIFF(MINUTE, fecha_generacion, NOW()) <= 10;";
+        String query = "SELECT * FROM tbl_empleados WHERE correo = ? AND codigoVerificacion = ? AND TIMESTAMPDIFF(MINUTE, fechaGeneracion, NOW()) <= 10;";
         try (Connection connection = DatabaseConnection.getConnection();
              PreparedStatement statement = connection.prepareStatement(query)) {
             statement.setString(1, email);
@@ -240,7 +235,6 @@ public class InicioSesion extends Application {
             return false; // En caso de error, consideramos que la validación falló
         }
     }
-
     public static String generarCodigoVerificacion(int longitud) {
         StringBuilder sb = new StringBuilder(longitud);
         for (int i = 0; i < longitud; i++) {
@@ -249,10 +243,9 @@ public class InicioSesion extends Application {
         }
         return sb.toString();
     }
-
     public static void actualizarCodigoVerificacion(String email, String codigo) {
         try (Connection connection = DatabaseConnection.getConnection()) {
-            String query = "UPDATE tbl_empleados SET codigo_verificacion = ?, fecha_generacion = NOW() WHERE correo = ?";
+            String query = "UPDATE tbl_empleados SET codigoVerificacion = ?, fechaGeneracion = NOW() WHERE correo = ?";
             try (PreparedStatement statement = connection.prepareStatement(query)) {
                 statement.setString(1, codigo);
                 statement.setString(2, email);
@@ -289,15 +282,14 @@ public class InicioSesion extends Application {
             e.printStackTrace(); // Manejo de errores
         }
     }
-
     public void showLayoutPassword() throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/com/example/projectgui/RecuperacionPass.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
+        setPrimaryStage(primaryStage);
         primaryStage.setTitle("INICIO DE SESION");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
-
     public void actualizarPassUser(){
         if(!txtPassword1.getText().isEmpty() && !txtPassword2.getText().isEmpty()){
             if(txtPassword1.getText().equals(txtPassword2.getText())){
@@ -310,6 +302,9 @@ public class InicioSesion extends Application {
                         statement.setInt(2, idEmpleado);
                         statement.executeUpdate();
                     }
+                    //primaryStage.close();
+                    System.out.println(txtPassword1.getText().toString());
+                    System.out.println(idEmpleado);
                     showLogin();
                 } catch (SQLException e) {
                     e.printStackTrace(); // Manejo de errores
@@ -323,7 +318,6 @@ public class InicioSesion extends Application {
             mostrarError("CAMPOS VACIOS");
         }
     }
-
     public int getIdEmpleadoByCorreo(String correo) throws SQLException {
         String query = "SELECT idEmpleado FROM tbl_empleados WHERE correo = ?";
         try (Connection connection = DatabaseConnection.getConnection();
@@ -337,7 +331,6 @@ public class InicioSesion extends Application {
             }
         }
     }
-
     public void setPrimaryStage(Stage stage) {
         this.primaryStage = stage;
     }

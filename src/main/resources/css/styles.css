@@ -21,9 +21,52 @@
 
 
 .border-menu{
-    -fx-background-color: #176B87;
+    -fx-background-color: linear-gradient(to bottom, #176B87, #053B50);
 }
 
 .border-top{
-    -fx-background-color: #053B50;
+    -fx-background-color: linear-gradient(to bottom, #176B87, #053B50);
+}
+/**********************CSS PARA BOTONES LATERALES**********************/
+.sidebar-button {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 18px;
+    -fx-padding: 10px 20px;
+}
+
+/************************ESTILOS PARA TABLAS Y CAMPOS*********************/
+/* Estilo para la tabla */
+.table-view {
+    -fx-background-color: #f5f5f5; /* Color de fondo de la tabla */
+
+}
+
+/* Estilo para las filas impares */
+.table-row-cell:odd {
+    -fx-background-color: #e0e0e0; /* Color de fondo para filas impares */
+}
+
+/* Estilo para las filas pares */
+.table-row-cell:even {
+    -fx-background-color: #ffffff; /* Color de fondo para filas pares */
+}
+
+/* Estilo al pasar el mouse sobre las filas */
+.table-row-cell:hover {
+    -fx-background-color: #d1d1d1; /* Color de fondo al pasar el mouse */
+}
+
+/* Estilo para las cabeceras de columna */
+.table-view .column-header {
+    -fx-background-color: #4CAF50; /* Color de fondo para las cabeceras de columna */
+    ; /* Color del texto en las cabeceras de columna */
+    -fx-padding: 10px;
+}
+
+/* Estilo para las celdas */
+.table-cell {
+     /* Color del borde de las celdas */
+
+    -fx-padding: 10px;
 }
