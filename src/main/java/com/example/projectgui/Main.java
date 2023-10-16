@@ -86,6 +86,9 @@ public class Main implements Initializable {
             opcCrearEmpleado.setVisible(false);
             opcCrearUsuarios.setVisible(false);
             btnProveedores.setVisible(false);
+            btnCarrito.setVisible(false);
+            btnVentas.setVisible(false);
+            btnProductos.setVisible(false);
         }
     }
 
@@ -106,21 +109,7 @@ public class Main implements Initializable {
                 TblProductController productoController = (TblProductController) controller;
                 productoController.mostrarListaProducto();
             }
-            else if (controller instanceof InventarioController) {
-                InventarioController inventarioController = (InventarioController) controller;
-                //inventarioController.mostrarListaInventario();
-            } else if (controller instanceof CarritoController) {
-                CarritoController carritoController = (CarritoController) controller;
-                //carritoController.mostrarListaCarrito();
-            } else if (controller instanceof FacturaController) {
-                FacturaController facturaController = (FacturaController) controller;
-                //facturaController.mostrarListaFactura();
-            } else if(controller instanceof VentasController){
-                VentasController ventasController = (VentasController) controller;
-            } else if(controller instanceof  ProveedorController){
-                ProveedorController proveedorController = (ProveedorController) controller;
-            }
-             */
+        */
 
         } catch (IOException e) {
             e.printStackTrace();

@@ -2,7 +2,6 @@ package com.example.projectgui.Controller;
 
 import com.example.projectgui.DatabaseConnection;
 import com.example.projectgui.Models.Empleado;
-import com.example.projectgui.Models.Proveedor;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -208,5 +207,7 @@ public class TblEmpleadoController implements Initializable {
         EmpleadoController productControlador = new EmpleadoController();
         productControlador.aggEmpleado();
     }
+
+
     
 }

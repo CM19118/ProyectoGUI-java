@@ -170,7 +170,7 @@ public class UsuarioController implements Initializable {
         try {
             connect = DatabaseConnection.getConnection(); // Abre la conexión
 
-            if (!fieldPassword.getText().isEmpty() && !fieldUsuario.getText().isEmpty() && listEmpleados.getValue()!=null &&
+            if (!fieldUsuario.getText().isEmpty() && listEmpleados.getValue()!=null &&
                     listRoles.getValue()!=null) {
                 // Obtener el ID del proveedor correspondiente al nombre seleccionado
                 tblproduct = new TblProductController();
@@ -179,29 +179,42 @@ public class UsuarioController implements Initializable {
                 String nombreCompletoSeleccionado = listEmpleados.getValue().toString();
                 int idEmpleadoSeleccionado = obtenerIdEmpleadoPorNombreCompleto(nombreCompletoSeleccionado);
                 String passwordHash = BCrypt.hashpw(fieldPassword.getText(), BCrypt.gensalt());
-                System.out.println(passwordHash);
+                //System.out.println(passwordHash);
 
-                System.out.println(bandera);
+                //System.out.println(bandera);
                 if(bandera){
-                    query = "UPDATE `tbl_usuarios` SET "
-                            + "`idEmpleado`=?,"
-                            + "`usuario`=?,"
-                            + "`password`=?,"
-                            + "`rol`=?,"
-                            + "`idUsuario`= ? WHERE idUsuario = '"+idUsuario+"'";
+                    if(fieldPassword.getText().isEmpty()){
+                        query = "UPDATE `tbl_usuarios` SET "
+                                + "`idEmpleado`=?,"
+                                + "`usuario`=?,"
+                                + "`rol`=? WHERE idUsuario = '"+idUsuario+"'";
+
+                    }else{
+                        query = "UPDATE `tbl_usuarios` SET "
+                                + "`idEmpleado`=?,"
+                                + "`usuario`=?,"
+                                + "`password`=?,"
+                                + "`rol`=?,"
+                                + "`idUsuario`= ? WHERE idUsuario = '"+idUsuario+"'";
+                    }
                 }else{
                     query = "INSERT INTO `tbl_usuarios`(`idEmpleado`, `usuario`, `password`, `rol`) VALUES (?,?,?,?)";
                 }
-
                 PreparedStatement preparedStatement = connect.prepareStatement(query);
-                preparedStatement.setInt(1, idEmpleadoSeleccionado);
-                preparedStatement.setString(2, fieldUsuario.getText());
-                preparedStatement.setString(3, passwordHash);
-                preparedStatement.setInt(4, rolUser);
-
+                if(fieldPassword.getText().isEmpty()){
+                    preparedStatement.setInt(1, idEmpleadoSeleccionado);
+                    preparedStatement.setString(2, fieldUsuario.getText());
+                    preparedStatement.setInt(3, rolUser);
+                }else{
+                    preparedStatement.setInt(1, idEmpleadoSeleccionado);
+                    preparedStatement.setString(2, fieldUsuario.getText());
+                    preparedStatement.setString(3, passwordHash);
+                    preparedStatement.setInt(4, rolUser);
+                }
                 preparedStatement.execute();
                 // Cierra la ventana de productos (si es necesario)
                 if (stage != null) {
+                    actualizarEstadoEmpleado(idEmpleadoSeleccionado,connect);
                     stage.close();
                 }
                 // Actualiza la tabla
@@ -223,6 +236,13 @@ public class UsuarioController implements Initializable {
                 }
             }
         }
+    }
+    private void actualizarEstadoEmpleado(int idEmpleado, Connection connect) throws SQLException {
+        query = "UPDATE `tbl_empleados` SET "
+                + "`estadoUsuario`=? WHERE idEmpleado = '"+idEmpleado+"'";
+        PreparedStatement preparedStatement = connect.prepareStatement(query);
+        preparedStatement.setInt(1, 1);
+        preparedStatement.execute();
     }
     private int determinarRol(String rol){
         int numRol;

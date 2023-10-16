@@ -5,6 +5,7 @@ module com.example.projectgui {
     requires com.dlsc.formsfx;
     requires itextpdf;
     requires jbcrypt;
+    requires java.mail;
 
     opens com.example.projectgui.Models to javafx.base;
     opens com.example.projectgui to javafx.fxml;
