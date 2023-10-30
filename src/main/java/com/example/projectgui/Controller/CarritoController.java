@@ -341,7 +341,7 @@ public class CarritoController {
 
         try {
             // Cargar el archivo FXML que contiene el formulario
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formAsistencia.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/com/example/projectgui/formCliente.fxml"));
             Parent root = loader.load();
 
             // Configurar el escenario con el contenido del formulario
@@ -437,7 +437,6 @@ public class CarritoController {
                         consultaFactura.setDouble(3, precioTotalGastado2); // El monto total de la factura
                         consultaFactura.executeUpdate();
 
-                        System.out.println("Todo bien todo correxto !!");
 
                     } catch (SQLException e) {
                         e.printStackTrace();

@@ -17,7 +17,7 @@
         <Text layoutX="49.0" layoutY="126.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Buscar Reparacion" />
         <TextField layoutX="168.0" layoutY="108.0" prefHeight="24.0" prefWidth="415.0" />
         <Text layoutX="49.0" layoutY="170.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tabla de reparaciones" />
-        <TableView fx:id="tablaReparaciones" layoutX="11.0" layoutY="232.0" prefHeight="438.0" prefWidth="1381.0">
+        <TableView fx:id="tablaReparaciones" layoutX="11.0" layoutY="232.0" prefHeight="438.0" prefWidth="1431.0">
             <columns>
                 <TableColumn fx:id="colIdReparacion" prefWidth="27.0" text="ID" />
                 <TableColumn fx:id="colServicio" prefWidth="56.666664123535156" text="Servicio" />
@@ -31,7 +31,8 @@
                 <TableColumn fx:id="colEstadoPago" prefWidth="107.0" text="Estado Pago" />
                 <TableColumn fx:id="colDetallesCostosAdicionales" prefWidth="127.0" text="Costos Adicionales" />
                 <TableColumn fx:id="colMontoCostosAdicionales" minWidth="0.0" prefWidth="70.6666259765625" text="Monto Costos Adicionales" />
-                <TableColumn fx:id="colAcciones" prefWidth="187.3333740234375" text="Accion" />
+                <TableColumn fx:id="colAcciones" prefWidth="119.0" text="Accion" />
+                <TableColumn fx:id="colAccionesImpri" prefWidth="124.0" text="Accion" />
             </columns>
         </TableView>
         <Button fx:id="btnAgregarReparacion" layoutX="1003.0" layoutY="111.0" mnemonicParsing="false" text="Registrar una reparacion ">

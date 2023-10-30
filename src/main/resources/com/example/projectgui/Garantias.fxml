@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="406.0" prefWidth="1030.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Controller.GarantiaController">
+   <children>
+      <Text layoutX="318.0" layoutY="47.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Garantias ">
+         <font>
+            <Font size="21.0" />
+         </font>
+      </Text>
+      <TableView fx:id="tablaGarantias" layoutX="11.0" layoutY="110.0" prefHeight="284.0" prefWidth="1004.0">
+        <columns>
+          <TableColumn fx:id="colIdGarantia" prefWidth="75.0" text="Id Garantia" />
+            <TableColumn fx:id="colFechaGarantia" prefWidth="92.0" text="Fecha Registro" />
+          <TableColumn fx:id="colCliente" prefWidth="87.0" text="Cliente " />
+            <TableColumn fx:id="colEquipo" prefWidth="82.0" text="Equipo " />
+            <TableColumn fx:id="colDetalles" prefWidth="125.0" text="Detalles" />
+            <TableColumn fx:id="colMonto" prefWidth="84.0" text="Monto" />
+            <TableColumn fx:id="colFechaVencimiento" prefWidth="122.0" text="Fecha Vencimiento" />
+            <TableColumn fx:id="colEstadoGarantia" prefWidth="105.0" text="Estado Garantia" />
+            <TableColumn fx:id="colAcciones" prefWidth="219.0" text="Acciones" />
+        </columns>
+      </TableView>
+      <Text layoutX="44.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Filtrar" />
+      <ComboBox fx:id="comboEstadoGarantias" layoutX="89.0" layoutY="48.0" prefWidth="150.0" />
+   </children>
+</AnchorPane>
