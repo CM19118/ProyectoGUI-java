@@ -2,6 +2,7 @@ package com.example.projectgui.Controller;
 
 import com.example.projectgui.DatabaseConnection;
 import com.example.projectgui.Models.Reparacion;
+import com.example.projectgui.Models.ReparacionTecnico;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.PdfWriter;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -37,7 +39,7 @@ public class ReparacionesController {
     public Button btnAgregarReparacion;
 
 
-    //Configuracion de la tabala para mostrar los datos de las reparaciones
+    //Configuracion de la tabla para mostrar los datos de las reparaciones
     @FXML
     public TableView<Reparacion> tablaReparaciones;
     @FXML
@@ -66,6 +68,8 @@ public class ReparacionesController {
     public TableColumn<Reparacion, Double> colMontoCostosAdicionales;
     @FXML
     public TableColumn<Reparacion, Void> colAcciones;
+    @FXML
+    public TableColumn<Reparacion, Void> colAccionesImpri;
 
 
     public void initialize()
@@ -189,7 +193,7 @@ public class ReparacionesController {
 
                                             documentoPdf.add(new Paragraph("Costos Adicionales"));
                                             documentoPdf.add(new Paragraph("------------------------------------------------------------------------------------------------------------------------------"));
-                                            documentoPdf.add(new Paragraph("Detalle de constos adicionales: "+reparacionEquipo.getDetalleCostAdicional()));
+                                            documentoPdf.add(new Paragraph("Detalle de costos adicionales: "+reparacionEquipo.getDetalleCostAdicional()));
                                             documentoPdf.add(new Paragraph("Monto de costos adicionales: $ "+reparacionEquipo.getMontoCostAdicional()));
                                             documentoPdf.add(new Paragraph("\n"));
                                             documentoPdf.add(new Paragraph("\n"));
@@ -209,21 +213,26 @@ public class ReparacionesController {
                                         }
 
                                         //Para insertar en la tabla tbl_facturaReparaciones las facturas
-                                        String insertFacturaReparaciones = "INSERT INTO tbl_facturareparaciones (fechaFactura, monto, idReparacion) VALUES (?, ?, ?)";
+                                        String insertFacturaReparaciones = "INSERT INTO tbl_facturareparaciones (fechaFactura, monto, fechaVencimiento, estadoGarantia, idReparacion) VALUES (?, ?, ?, ?, ?)";
+                                        String insertarEstadoGarantia = "Vigente";
+                                        LocalDate fechaActual = LocalDate.now();
+                                        LocalDate fecha30DiasDespues = fechaActual.plusDays(30);
 
                                         try {
                                             PreparedStatement insertarTblFacReparaciones = conexion.prepareStatement(insertFacturaReparaciones);
                                             // Establecer los parámetros en la sentencia SQL para tbl_facturasReparaciones
-                                            LocalDate fechaActual = LocalDate.now();
+
                                             insertarTblFacReparaciones.setDate(1, Date.valueOf(fechaActual));
                                             insertarTblFacReparaciones.setDouble(2, totalPagarPorReparacion);
-                                            insertarTblFacReparaciones.setInt(3, reparacionEquipo.getIdReparacion());
+                                            insertarTblFacReparaciones.setDate(3, Date.valueOf(fecha30DiasDespues));
+                                            insertarTblFacReparaciones.setString(4, insertarEstadoGarantia);
+                                            insertarTblFacReparaciones.setInt(5, reparacionEquipo.getIdReparacion());
 
                                             int resultadoConsulta = insertarTblFacReparaciones.executeUpdate();
 
                                             if (resultadoConsulta > 0 )
                                             {
-                                                System.out.println("Se insertyro en la tbl_reparacionesFactras");
+                                                System.out.println("Se inserto en la tbl_reparacionesFactras");
                                             }
                                             else
                                             {
@@ -275,6 +284,129 @@ public class ReparacionesController {
             } //Fin de la configuraion de la celda
 
         });//Fin de la configuracion de la columna
+
+        colAccionesImpri.setCellFactory(columna ->{
+            return new TableCell<Reparacion, Void>(){
+
+                private final Button btnImprimirReparacionEnCurso = new Button("Impr. Reparacion_En_Curso");
+
+                {
+                    btnImprimirReparacionEnCurso.setOnAction(event -> {
+
+                        //Para obtener datos del registro a imprimir
+                        Reparacion obtnerInfoReparacion = getTableView().getItems().get(getIndex());
+
+                        SimpleDateFormat fechaReparacion = new SimpleDateFormat("dd-MM-yyyy");
+                        String fechaReparacionFactura = fechaReparacion.format(new java.util.Date());
+                        Random rand = new Random();
+                        int numeroAleatorio = rand.nextInt(10000);
+
+                        //Se Crea el nombre del archvio y se guarda en el directorio que deseamos
+                        String nombreReparacionFactura = "ReparacionEnCurso/Rep-En_Curso_" + fechaReparacionFactura +"_"+obtnerInfoReparacion.getCliente()+"_" + numeroAleatorio + ".pdf";
+
+                        try {
+
+                            //Se Crea el docuemnto pdf de la factura de reparaciones
+                            Document documentoPdf = new Document();
+                            FileOutputStream archivoPDF = new FileOutputStream(nombreReparacionFactura);
+                            PdfWriter.getInstance(documentoPdf, archivoPDF);
+
+                            documentoPdf.open();
+
+                            // Define la fuente y el tamaño de la letra para el encabezado
+                            Font fuenteEncabezado = new Font(Font.FontFamily.TIMES_ROMAN, 18, Font.BOLD);
+
+                            // Agrega el encabezado centrado
+                            Paragraph encabezado = new Paragraph("Reparaciones Keilly", fuenteEncabezado);
+                            encabezado.setAlignment(Paragraph.ALIGN_CENTER);
+                            documentoPdf.add(encabezado);
+                            documentoPdf.add(new Paragraph("\n"));
+
+                            //Segundo encaabezado de como subtitulo indicando el tirulo del informe
+                            Paragraph encabezadoSecundario = new Paragraph("Comprobante de Reparacion En Curso", FontFactory.getFont(FontFactory.HELVETICA_BOLD,15));
+                            encabezadoSecundario.setAlignment(Element.ALIGN_CENTER);
+                            documentoPdf.add(encabezadoSecundario);
+
+                            //Salto de linea
+                            documentoPdf.add(new Paragraph("\n"));
+
+                            SimpleDateFormat fechaYhora = new SimpleDateFormat("dd-MM-yyyy hh:mm a");
+                            String fechaDeLaReparacion = fechaYhora.format(new java.util.Date());
+
+                            //Se agrega la fecha y la hora al doccumento
+                            Paragraph fechaAgregar = new Paragraph("Fecha y hora de emisión: "+ fechaDeLaReparacion);
+                            documentoPdf.add(fechaAgregar);
+
+                            //Salto de linea
+                            documentoPdf.add(new Paragraph("\n"));
+
+                            // Agrega el nombre del cliente, teléfono y DUI
+                            documentoPdf.add(new Paragraph("Datos Generales"));
+                            documentoPdf.add(new Paragraph("------------------------------------------------------------------------------------------------------------------------------"));
+                            documentoPdf.add(new Paragraph("Nombre del Cliente: " + obtnerInfoReparacion.getCliente()));
+                            documentoPdf.add(new Paragraph("Teléfono: " + obtnerInfoReparacion.getNumTelefono()));
+                            documentoPdf.add(new Paragraph("Fecha de inicio de reparacion: " + obtnerInfoReparacion.getFechaInicio()));
+                            documentoPdf.add(new Paragraph("\n"));
+                            documentoPdf.add(new Paragraph("\n"));
+
+                            documentoPdf.add(new Paragraph("Servicio brindado: "+obtnerInfoReparacion.getServicio()));
+                            documentoPdf.add(new Paragraph("Equipo reparado: "+obtnerInfoReparacion.getEquipo()));
+                            documentoPdf.add(new Paragraph("Precio del servicio: $ "+obtnerInfoReparacion.getPrecioUnitario()));
+                            documentoPdf.add(new Paragraph("Detalles: "+obtnerInfoReparacion.getDetalles()));
+                            documentoPdf.add(new Paragraph("\n"));
+                            documentoPdf.add(new Paragraph("\n"));
+
+                            documentoPdf.add(new Paragraph("Costos Adicionales:"));
+                            if (obtnerInfoReparacion.getDetalleCostAdicional() == null) {
+                                documentoPdf.add(new Paragraph("Detalle de costos adicionales: No se han registrado"));
+                            } else {
+                                documentoPdf.add(new Paragraph("Detalle de costos adicionales: " + obtnerInfoReparacion.getDetalleCostAdicional()));
+                            }
+                            documentoPdf.add(new Paragraph("Monto de costos adicionales: $ "+obtnerInfoReparacion.getMontoCostAdicional()));
+                            documentoPdf.add(new Paragraph("\n"));
+                            documentoPdf.add(new Paragraph("\n"));
+
+                            // Agrega un mensaje de agradecimiento
+                            documentoPdf.add(new Paragraph("Gracias por su preferencia"));
+
+                            documentoPdf.close();
+
+                            Alert alertaConfimar = new Alert(Alert.AlertType.INFORMATION);
+                            alertaConfimar.setTitle("Confirmacion");
+                            alertaConfimar.setContentText("SE HA CREADO EL COMPROBANTE");
+                            alertaConfimar.showAndWait();
+
+                        }catch (Exception e)
+                        {
+                            e.printStackTrace();
+                        }
+
+                    }); //Fin de la fucnion del boton
+
+                }
+
+                @Override
+                protected void updateItem(Void item, boolean empty) {
+                    super.updateItem(item, empty);
+
+                    if (empty) {
+                        setGraphic(null);
+                    } else {
+
+                        Reparacion obtenerDatosDelRegistro = getTableView().getItems().get(getIndex());
+
+                        //Verofocacion de los estados para que aparezca el boton correspondiente
+                        if (obtenerDatosDelRegistro.getEstado().equals("En_Curso")) //Para iniciar la reparacion
+                        {
+                            HBox buttonsContainer = new HBox(btnImprimirReparacionEnCurso);
+                            setGraphic(buttonsContainer);
+                        }
+
+                    }
+                }
+
+            };
+        });
 
         cargarReparaciones();
 
@@ -451,8 +583,4 @@ public class ReparacionesController {
 
     }
 
-    private void RefrecarTabla()
-    {
-        tablaReparaciones.refresh();
-    }
 }

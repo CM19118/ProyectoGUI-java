@@ -20,6 +20,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.scene.control.ScrollPane?>
+
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="998.0" prefWidth="1751.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectgui.Main">
    <top>
       <HBox alignment="CENTER_LEFT" prefHeight="58.0" prefWidth="200.0" spacing="20.0" stylesheets="@../../../css/styles.css" BorderPane.alignment="CENTER">
@@ -43,11 +45,14 @@
             <HBox alignment="CENTER" prefHeight="58.0" prefWidth="333.0">
                <children>
                   <SplitMenuButton fx:id="splitMenuBtn" mnemonicParsing="false">
-                    <items>
-                      <MenuItem mnemonicParsing="false" onAction="#openFormAsistencia" text="MARCAR ASISTENCIA" />
-                      <MenuItem fx:id="opcCrearEmpleado" mnemonicParsing="false" onAction="#openFormEmpleados" text="CREAR EMPLEADOS" />
+                     <items>
+                        <MenuItem mnemonicParsing="false" onAction="#openFormAsistencia" text="MARCAR ASISTENCIA" />
+                        <MenuItem fx:id="opcCrearEmpleado" mnemonicParsing="false" onAction="#openFormEmpleados" text="CREAR EMPLEADOS" />
                         <MenuItem fx:id="opcCrearUsuarios" mnemonicParsing="false" onAction="#openFormUsuarios" text="CREAR USUARIOS" />
-                    </items>
+                        <MenuItem fx:id="opcAsistencia" mnemonicParsing="false" onAction="#openVistasAsistencia" text="ADMINISTRAR ASISTENCIAS" />
+                        <MenuItem fx:id="opcGestionarServicios" mnemonicParsing="false" onAction="#openVistaServicios" text="ADMINISTRAR SERVICIOS" />
+
+                     </items>
                      <graphic>
                         <ImageView fitHeight="24.0" fitWidth="24.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -154,6 +159,12 @@
                         <Font name="Berlin Sans FB" size="17.0" />
                      </font>
                   </Button>
+                  <Button fx:id="btnReparacionesTecnico" layoutX="10.0" layoutY="434.0" mnemonicParsing="false" onAction="#handleClick" prefHeight="100.0" prefWidth="254.0" styleClass="sidebar-button" stylesheets="@../../../css/styles.css" text="REPARACION TEC.">
+                     <font>
+                        <Font name="Berlin Sans FB" size="17.0" />
+                     </font>
+                  </Button>
+
                </children>
                <VBox.margin>
                   <Insets top="20.0" />
@@ -209,3 +220,6 @@
       </StackPane>
    </center>
 </BorderPane>
+
+
+

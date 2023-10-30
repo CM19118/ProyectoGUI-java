@@ -26,9 +26,9 @@ public class Main implements Initializable {
     @FXML
     private Text textoMain;
     @FXML
-    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones;
+    private Button btnCarrito, btnFacturas, btnInventario, btnProductos, btnVentas, btnProveedores, btnReparaciones, btnGarantias, btnReparacionesTecnico;
     @FXML
-    private MenuItem opcCrearEmpleado, opcCrearUsuarios;
+    private MenuItem opcCrearEmpleado, opcCrearUsuarios, opcAsistencia, opcGestionarServicios;
     @FXML
     private StackPane centerPane;
     @FXML
@@ -80,7 +80,14 @@ public class Main implements Initializable {
         }else if(event.getSource() == btnReparaciones){
             loadView("Reparaciones.fxml");
             textoMain.setText("Reparaciones");
+        } else if (event.getSource() == btnGarantias) {
+            loadView("Garantias.fxml");
+            textoMain.setText("Garantias");
+        } else if (event.getSource() == btnReparacionesTecnico) {
+            loadView("RaparacionesTecnico.fxml");
+            textoMain.setText("Tec.Reparacion");
         }
+
     }
 
     private void manejodeVistas(int rol){
@@ -90,11 +97,16 @@ public class Main implements Initializable {
             splitMenuBtn.setText("Empleado");
             opcCrearEmpleado.setVisible(false);
             opcCrearUsuarios.setVisible(false);
+            opcAsistencia.setVisible(false);
+            opcGestionarServicios.setVisible(false);
             btnProveedores.setVisible(false);
+
         }else{
             splitMenuBtn.setText("Tecnico");
             opcCrearEmpleado.setVisible(false);
             opcCrearUsuarios.setVisible(false);
+            opcAsistencia.setVisible(false);
+            opcGestionarServicios.setVisible(false);
             btnProveedores.setVisible(false);
             btnCarrito.setVisible(false);
             btnVentas.setVisible(false);
@@ -151,5 +163,13 @@ public class Main implements Initializable {
     private void openFormUsuarios(){
         loadView("Usuario.fxml");
     }
+    @FXML
+    private void  openVistasAsistencia()
+    {
+        loadView("VistaAsistencias.fxml");
+    }
 
+    public void openVistaServicios() {
+        loadView("Servicios.fxml");
+    }
 }

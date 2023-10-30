@@ -143,7 +143,7 @@ public class TblProveedorController implements Initializable {
 
                                     if (filasAfectadas > 0) {
                                         // Eliminación exitosa, puedes actualizar la tabla
-                                        tablaProveedor.getItems().remove(proveedor);
+                                        System.out.println("Proveedor Eliminado con exito");
                                     }
                                 } catch (SQLException e) {
                                     e.printStackTrace();
